@@ -1,0 +1,88 @@
+name: ci
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*'
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.1
+    - run: make docker-test
+    - name: Validate the changelog
+      uses: ./
+      id: clq-validate
+      with:
+              mode: feature
+    - name: Echo changelog values
+      run: |
+              echo "$release_name"
+              echo "$release_tag -- $release_status"
+              echo "$body"
+      env:
+        release_tag: ${{ steps.clq-validate.outputs.tag }}
+        release_name: ${{ steps.clq-validate.outputs.name }}
+        release_status: ${{ steps.clq-validate.outputs.status }}
+        body: ${{ steps.clq-validate.outputs.changes }}
+  validate-release:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract tag from the changelog
+      uses: ./
+      id: clq-extract
+      with:
+              mode: release
+    - name: Validate the tag has not yet been used
+      env:
+        TAG: ${{ steps.clq-extract.outputs.tag }}
+      run: |
+        if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+          echo "::error ::tag $TAG exists already"
+          exit 1
+        fi
+  tag:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: [ test, validate-release ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.1
+    - name: Extract release information from the changelog
+      uses: ./
+      id: clq-extract
+    - uses: actions/create-release@v1.1.2
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.clq-extract.outputs.tag }}
+        release_name: ${{ steps.clq-extract.outputs.name }}
+        prerelease: ${{ steps.clq-extract.outputs.status == 'prereleased' }}
+        body: ${{ steps.clq-extract.outputs.changes }}
+    - uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/clq-darwin-amd64
+        asset_name: clq-darwin-amd64
+        asset_content_type: application/octet-stream
+    - uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/clq-linux-amd64
+        asset_name: clq-linux-amd64
+        asset_content_type: application/octet-stream
+    - uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/clq-windows-amd64
+        asset_name: clq-windows-amd64
+        asset_content_type: application/octet-stream
