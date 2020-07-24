@@ -1,0 +1,29 @@
+name: 'Changelog Query'
+description: 'Validate the changelog file and extract current release information'
+inputs:
+        changelog:
+                description: 'name of the changelog file'
+                required: false
+                default: 'CHANGELOG.md'
+        mode:
+                description: 'validation mode for the changelog, one of "release" or "feature"'
+                required: false
+                default: 'release'
+outputs:
+        version:
+                description: 'The release version'
+        tag:
+                description: 'The tag to apply, the version prefixed with a "v"'
+        name:
+                description: 'The release name'
+        status:
+                description: 'The status of the release (prereleased, released, unreleased, yanked)'
+        changes:
+                description: 'all the changes for that release'
+runs:
+        using: 'docker'
+        image: 'Dockerfile'
+        args:
+                - ${{ inputs.mode }}
+                - ${{ inputs.changelog }}
+

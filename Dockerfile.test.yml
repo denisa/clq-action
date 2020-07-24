@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  sut:
+    image: denisa/clq-action
+    volumes:
+      - ./CHANGELOG.md:/home/CHANGELOG.md:ro
+    command: [ "feature", "/home/CHANGELOG.md" ]
