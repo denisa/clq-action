@@ -1,4 +1,7 @@
 # clq-action
+[![version](https://img.shields.io/github/v/release/denisa/clq-action?include_prereleases&sort=semver)](https://github.com/denisa/clq-action/releases)
+[![semantic versioning](https://img.shields.io/badge/semantic%20versioning-2.0.0-informational)](https://semver.org/spec/v2.0.0.html)
+
 GitHub action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
 
@@ -21,7 +24,7 @@ All the outputs comes from the top-most entry in the changelog
 The release version.
 
 ### `tag`
-The release version as a tag, that is prefixed with a `"v"`.
+The release version as a tag, that is the version prefixed with a `"v"`.
 
 ### `name`
 The title of the release, it defaults to `"Release "` followed by the version, unless
@@ -32,7 +35,7 @@ Please see [clq](https://github.com/denisa/clq/blob/master/README.md) for more d
 The status of the release, one of `"prereleased"`, `"released"`, `"unreleased"`, or `"yanked"`.
 
 ### `changes`
-All the changes defined for that release. Intended to be used for GitHub’s _release description__.
+All the changes defined for that release. Intended to be used for GitHub’s _release description_.
 
 ## Example Usage
 
@@ -41,7 +44,7 @@ This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
 ```
     - name: Validate the changelog
-      uses: action/clq-action@v1.0.0
+      uses: denisa/clq-action@v1.0.0
       with:
               mode: feature
 ```
@@ -51,7 +54,7 @@ This build must ensure that the changelog introduces a new release version.
 Use as
 ```
     - name: Extract tag from the changelog
-      uses: action/clq-action@v1.0.0
+      uses: denisa/clq-action@v1.0.0
       id: clq-extract
       with:
               mode: release
@@ -70,7 +73,7 @@ This build must extract from the changelog all the information needed to cut a n
 Use
 ```
     - name: Extract release information from the changelog
-      uses: action/clq-action@v1.0.0
+      uses: denisa/clq-action@v1.0.0
       id: clq-extract
     - uses: actions/create-release@v1.1.2
       id: create_release
