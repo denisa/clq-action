@@ -54,7 +54,7 @@ jobs:
     - name: Extract release information from the changelog
       uses: ./
       id: clq-extract
-    - uses: actions/create-release@v1.1.2
+    - uses: actions/create-release@v1.1.3
       id: create_release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
