@@ -17,6 +17,10 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.0.3] - 2022-04-29
+### Fixed
+- Bump denisa/clq from 1.3.0-alpine to 1.6.1-alpine
+
 ## [1.0.2] - 2020-07-25
 ### Fixed
 - examples have the proper `uses:` statement
