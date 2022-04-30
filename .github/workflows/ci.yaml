@@ -10,18 +10,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.1
+    - uses: actions/checkout@v3.0.2
     - run: make docker-test
     - name: Validate the changelog
       uses: ./
       id: clq-validate
       with:
-              mode: feature
+        mode: feature
     - name: Echo changelog values
       run: |
-              echo "$release_name"
-              echo "$release_tag -- $release_status"
-              echo "$body"
+          echo "$release_name"
+          echo "$release_tag -- $release_status"
+          echo "$body"
       env:
         release_tag: ${{ steps.clq-validate.outputs.tag }}
         release_name: ${{ steps.clq-validate.outputs.name }}
@@ -31,12 +31,12 @@ jobs:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.1
+    - uses: actions/checkout@v3.0.2
     - name: Extract tag from the changelog
       uses: ./
       id: clq-extract
       with:
-              mode: release
+          mode: release
     - name: Validate the tag has not yet been used
       env:
         TAG: ${{ steps.clq-extract.outputs.tag }}
@@ -50,16 +50,26 @@ jobs:
     needs: [ test, validate-release ]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.1
-    - name: Extract release information from the changelog
-      uses: ./
+    - uses: actions/checkout@v3.0.2
+    - uses: ./
       id: clq-extract
-    - uses: actions/create-release@v1.1.2
-      id: create_release
+    - name: Create tags
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
         tag_name: ${{ steps.clq-extract.outputs.tag }}
-        release_name: ${{ steps.clq-extract.outputs.name }}
+      run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          before_tag_name='v'
+          until [ "$before_tag_name" = "$tag_name" ]; do
+            git tag $tag_name
+            before_tag_name=$tag_name
+            tag_name=${tag_name%.*}
+          done
+          git push origin --tags
+    - uses: ncipollo/release-action@v1.10.0
+      with:
+        tag: ${{ steps.clq-extract.outputs.tag }}
         prerelease: ${{ steps.clq-extract.outputs.status == 'prereleased' }}
+        name: ${{ steps.clq-extract.outputs.name }}
         body: ${{ steps.clq-extract.outputs.changes }}

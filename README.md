@@ -44,7 +44,7 @@ This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
 ```
     - name: Validate the changelog
-      uses: denisa/clq-action@v1.0.0
+      uses: denisa/clq-action@v3.0.2
       with:
               mode: feature
 ```
@@ -54,7 +54,7 @@ This build must ensure that the changelog introduces a new release version.
 Use as
 ```
     - name: Extract tag from the changelog
-      uses: denisa/clq-action@v1.0.0
+      uses: denisa/clq-action@v3.0.2
       id: clq-extract
       with:
               mode: release
@@ -72,17 +72,28 @@ Use as
 This build must extract from the changelog all the information needed to cut a new release.
 Use
 ```
-    - name: Extract release information from the changelog
-      uses: denisa/clq-action@v1.0.0
+    - uses: actions/checkout@v3.0.2
+    - uses: ./
       id: clq-extract
-    - uses: actions/create-release@v1.1.2
-      id: create_release
+    - name: Create tags
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
         tag_name: ${{ steps.clq-extract.outputs.tag }}
-        release_name: ${{ steps.clq-extract.outputs.name }}
+      run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          before_tag_name='v'
+          until [ "$before_tag_name" = "$tag_name" ]; do
+            git tag $tag_name
+            before_tag_name=$tag_name
+            tag_name=${tag_name%.*}
+          done
+          git push origin --tags
+    - uses: ncipollo/release-action@v1.10.0
+      with:
+        tag: ${{ steps.clq-extract.outputs.tag }}
         prerelease: ${{ steps.clq-extract.outputs.status == 'prereleased' }}
+        name: ${{ steps.clq-extract.outputs.name }}
         body: ${{ steps.clq-extract.outputs.changes }}
 
 ```
