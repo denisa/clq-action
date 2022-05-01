@@ -27,7 +27,7 @@ The release version.
 The release version as a tag, that is the version prefixed with a `"v"`.
 
 ### `name`
-The title of the release, it defaults to `"Release "` followed by the version, unless
+The title of the release, it defaults to `"Release"` followed by the version, unless
 the release has a _label_ in the changelog.
 Please see [clq](https://github.com/denisa/clq/blob/master/README.md) for more details.
 
@@ -46,7 +46,7 @@ To that effect, add
     - name: Validate the changelog
       uses: denisa/clq-action@v1.1
       with:
-              mode: feature
+        mode: feature
 ```
 
 ### Pull-request
@@ -57,7 +57,7 @@ Use as
       uses: denisa/clq-action@v1.1
       id: clq-extract
       with:
-              mode: release
+        mode: release
     - name: Validate the tag has not yet been used
       env:
         TAG: ${{ steps.clq-extract.outputs.tag }}
@@ -79,16 +79,19 @@ Use
       env:
         tag_name: ${{ steps.clq-extract.outputs.tag }}
       run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+        git config user.name github-actions
+        git config user.email github-actions@github.com
 
-          before_tag_name='v'
-          until [ "$before_tag_name" = "$tag_name" ]; do
-            git tag $tag_name
-            before_tag_name=$tag_name
-            tag_name=${tag_name%.*}
-          done
-          git push origin --tags
+        tags=()
+        before_tag_name='v'
+        until [ "$before_tag_name" = "$tag_name" ]; do
+          tags+=("$tag_name")
+          git tag "$tag_name"
+          before_tag_name="$tag_name"
+          tag_name="${tag_name%.*}"
+        done
+        git push origin "${tags[0]}"
+        git push origin --force "${tags[@]:1}"
     - uses: ncipollo/release-action@v1.10.0
       with:
         tag: ${{ steps.clq-extract.outputs.tag }}
