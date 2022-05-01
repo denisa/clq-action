@@ -19,9 +19,9 @@ jobs:
         mode: feature
     - name: Echo changelog values
       run: |
-          echo "$release_name"
-          echo "$release_tag -- $release_status"
-          echo "$body"
+        echo "$release_name"
+        echo "$release_tag -- $release_status"
+        echo "$body"
       env:
         release_tag: ${{ steps.clq-validate.outputs.tag }}
         release_name: ${{ steps.clq-validate.outputs.name }}
@@ -36,7 +36,7 @@ jobs:
       uses: ./
       id: clq-extract
       with:
-          mode: release
+        mode: release
     - name: Validate the tag has not yet been used
       env:
         TAG: ${{ steps.clq-extract.outputs.tag }}
@@ -57,28 +57,34 @@ jobs:
       env:
         tag_name: ${{ steps.clq-extract.outputs.tag }}
       run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+        git config user.name github-actions
+        git config user.email github-actions@github.com
 
-          version=${tag_name%%-*}
-          preversion=${tag_name##*-}
+        tags=()
+        version=${tag_name%%-*}
+        preversion=${tag_name##*-}
 
-          if [ "$version" != "$preversion" ]; then
-            before=''
-            until [ "$before" = "$preversion" ]; do
-              git tag ${version}-${preversion}
-              before=$preversion
-              preversion=${preversion%.*}
-            done
-          fi
-
+        if [ "$version" != "$preversion" ]; then
           before=''
-          until [ "$before" = "$version" ]; do
-            git tag $version
-            before=$version
-            version=${version%.*}
+          until [ "$before" = "$preversion" ]; do
+            tags+=("${version}-${preversion}")
+            git tag "${tags[-1]}"
+            before="$preversion"
+            preversion="${preversion%.*}"
           done
-          git push origin --tags
+        fi
+
+        before=''
+        until [ "$before" = "$version" ]; do
+          tags+=("$version")
+          git tag "$version"
+          before="$version"
+          version="${version%.*}"
+        done
+        # ensure this tag doesn't exist
+        git push origin "${tags[0]}"
+        # move all other tags
+        git push origin --force "${tags[@]:1}"
     - uses: ncipollo/release-action@v1.10.0
       with:
         tag: ${{ steps.clq-extract.outputs.tag }}
