@@ -17,6 +17,12 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.1.1] - 2022-04-30
+### Fixed
+- create all tags include pre-release version
+- Examples in the README were not referencing the action
+
+
 ## [1.1.0] - 2022-04-29
 ### Changed
 - create all tags (major/minor/patch, major/minor, major)

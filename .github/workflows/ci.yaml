@@ -60,11 +60,23 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          before_tag_name='v'
-          until [ "$before_tag_name" = "$tag_name" ]; do
-            git tag $tag_name
-            before_tag_name=$tag_name
-            tag_name=${tag_name%.*}
+          version=${tag_name%%-*}
+          preversion=${tag_name##*-}
+
+          if [ "$version" != "$preversion" ]; then
+            before=''
+            until [ "$before" = "$preversion" ]; do
+              git tag ${version}-${preversion}
+              before=$preversion
+              preversion=${preversion%.*}
+            done
+          fi
+
+          before=''
+          until [ "$before" = "$version" ]; do
+            git tag $version
+            before=$version
+            version=${version%.*}
           done
           git push origin --tags
     - uses: ncipollo/release-action@v1.10.0
