@@ -44,7 +44,7 @@ This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
 ```
     - name: Validate the changelog
-      uses: denisa/clq-action@v3.0.2
+      uses: denisa/clq-action@v1.1
       with:
               mode: feature
 ```
@@ -54,7 +54,7 @@ This build must ensure that the changelog introduces a new release version.
 Use as
 ```
     - name: Extract tag from the changelog
-      uses: denisa/clq-action@v3.0.2
+      uses: denisa/clq-action@v1.1
       id: clq-extract
       with:
               mode: release
@@ -73,7 +73,7 @@ This build must extract from the changelog all the information needed to cut a n
 Use
 ```
     - uses: actions/checkout@v3.0.2
-    - uses: ./
+    - uses: denisa/clq-action@v1.1
       id: clq-extract
     - name: Create tags
       env:
