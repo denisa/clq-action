@@ -42,7 +42,7 @@ All the changes defined for that release. Intended to be used for GitHub’s _re
 ### Feature Branch
 This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
-```
+```yaml
     - name: Validate the changelog
       uses: denisa/clq-action@v1.1
       with:
@@ -52,7 +52,7 @@ To that effect, add
 ### Pull-request
 This build must ensure that the changelog introduces a new release version.
 Use as
-```
+```yaml
     - name: Extract tag from the changelog
       uses: denisa/clq-action@v1.1
       id: clq-extract
@@ -71,7 +71,7 @@ Use as
 ### Release Branch
 This build must extract from the changelog all the information needed to cut a new release.
 Use
-```
+```yaml
     - uses: actions/checkout@v3.0.2
     - uses: denisa/clq-action@v1.1
       id: clq-extract

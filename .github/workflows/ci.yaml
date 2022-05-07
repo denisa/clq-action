@@ -55,32 +55,27 @@ jobs:
       id: clq-extract
     - name: Create tags
       env:
-        tag_name: ${{ steps.clq-extract.outputs.tag }}
+        tag: ${{ steps.clq-extract.outputs.tag }}
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
 
-        tags=()
-        version=${tag_name%%-*}
-        preversion=${tag_name##*-}
-
+        version="${tag%%-*}"
+        preversion="${tag##*-}"
         if [ "$version" != "$preversion" ]; then
-          before=''
-          until [ "$before" = "$preversion" ]; do
-            tags+=("${version}-${preversion}")
-            git tag "${tags[-1]}"
-            before="$preversion"
-            preversion="${preversion%.*}"
-          done
+          prefix="${version}-"
+          tag="$preversion"
         fi
 
+        tags=()
         before=''
-        until [ "$before" = "$version" ]; do
-          tags+=("$version")
-          git tag "$version"
-          before="$version"
-          version="${version%.*}"
+        until [ "$before" = "$tag" ]; do
+          tags+=("${prefix:-}${tag}")
+          git tag "${tags[-1]}"
+          before="$tag"
+          tag="${tag%.*}"
         done
+
         # ensure this tag doesn't exist
         git push origin "${tags[0]}"
         # move all other tags
