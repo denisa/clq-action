@@ -17,6 +17,10 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.1.2] - 2022-05-07
+### Fixed
+- When creating all tags, creates either version or (tries to create) prerelease tags
+
 ## [1.1.1] - 2022-04-30
 ### Fixed
 - create all tags include pre-release version
