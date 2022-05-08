@@ -17,6 +17,10 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.1.3] - 2022-05-08
+### Fixed
+- rename github branch to `main`
+
 ## [1.1.2] - 2022-05-07
 ### Fixed
 - When creating all tags, creates either version or (tries to create) prerelease tags
@@ -26,7 +30,6 @@ Categories:
 ### Fixed
 - create all tags include pre-release version
 - Examples in the README were not referencing the action
-
 
 ## [1.1.0] - 2022-04-29
 ### Changed

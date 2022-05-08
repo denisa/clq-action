@@ -29,7 +29,7 @@ The release version as a tag, that is the version prefixed with a `"v"`.
 ### `name`
 The title of the release, it defaults to `"Release"` followed by the version, unless
 the release has a _label_ in the changelog.
-Please see [clq](https://github.com/denisa/clq/blob/master/README.md) for more details.
+Please see [clq](https://github.com/denisa/clq/blob/main/README.md) for more details.
 
 ### `status`
 The status of the release, one of `"prereleased"`, `"released"`, `"unreleased"`, or `"yanked"`.
