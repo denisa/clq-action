@@ -28,7 +28,7 @@ jobs:
         release_status: ${{ steps.clq-validate.outputs.status }}
         body: ${{ steps.clq-validate.outputs.changes }}
   validate-release:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/master'
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3.0.2
@@ -46,7 +46,7 @@ jobs:
           exit 1
         fi
   tag:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [ test, validate-release ]
     runs-on: ubuntu-latest
     steps:
