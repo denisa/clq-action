@@ -8,14 +8,18 @@ Keep the newest entry at top, format date according to ISO 8601: `YYYY-MM-DD`.
 
 Categories:
 - _major_ release trigger:
-   - `Added` for new features.
+   - `Changed` for changes in existing functionality.
    - `Removed` for now removed features.
 - _minor_ release trigger:
-   - `Changed` for changes in existing functionality.
+   - `Added` for new features.
    - `Deprecated` for soon-to-be removed features.
 - _bug-fix_ release trigger:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
+
+## [1.1.4] - 2022-05-11
+### Fixed
+- Bump denisa/clq from 1.6.2-alpine to 1.6.3-alpine
 
 ## [1.1.3] - 2022-05-08
 ### Fixed
