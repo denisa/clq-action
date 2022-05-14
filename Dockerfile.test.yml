@@ -1,8 +1,14 @@
 version: '3'
 
 services:
-  sut:
+  withoutChangeMap:
+    image: denisa/clq-action
+    volumes:
+      - ./test_changelog.md:/home/CHANGELOG.md:ro
+    command: [ "feature", "/home/CHANGELOG.md" ]
+  withChangeMap:
     image: denisa/clq-action
     volumes:
       - ./CHANGELOG.md:/home/CHANGELOG.md:ro
-    command: [ "feature", "/home/CHANGELOG.md" ]
+      - ./.github/clq/changemap.json:/home/changemap.json:ro
+    command: [ "feature", "/home/CHANGELOG.md", "/home/changemap.json" ]

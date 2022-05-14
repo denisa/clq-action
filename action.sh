@@ -1,35 +1,61 @@
-#!/bin/sh -l
+#!/bin/ash -l
+# shellcheck shell=dash
+
 set -o errexit
 set -o nounset
 set -o pipefail
 
-case "$1" in
+clq() {
+  [ -n "$mode" ] && set -- "$mode" "$@"
+  [ -n "$changeMap" ] && set -- "-changeMap" "$changeMap" "$@"
+  /usr/bin/clq "$@"
+}
+
+mode=$1
+shift
+case "$mode" in
   release)
     mode="-release"
     ;;
   feature)
-    mode=""
+    mode=''
     ;;
    *)
-   echo "::error ::Mode $1 undefined, must be one of (feature|release)"
+   echo "::error ::Mode $mode undefined, must be one of (feature|release)"
    exit 1
    ;;
 esac
-changelog="$2"
 
-release_version=$(/usr/bin/clq $mode -query 'releases[0].version' $changelog)
+changelog=$1
+shift
+if ! [ -r "$changelog" ]; then
+  echo "::error ::changelog $changelog is not readable"
+  exit 1
+fi
+
+if [ "$#" -eq 1 ]; then
+  changeMap="$1"
+  shift
+  if ! [ -r "$changeMap" ]; then
+    echo "::error ::changeMap $changeMap is not readable"
+    exit 1
+  fi
+else
+  changeMap=''
+fi
+release_version="$(clq -query 'releases[0].version' "$changelog")"
 release_tag="v${release_version}"
 
-release_name="$(/usr/bin/clq $mode -query 'releases[0].label' $changelog)"
+release_name="$(clq -query 'releases[0].label' "$changelog")"
 if [ -z "$release_name" ]; then
    release_name="Release $release_version"
 fi
 
-release_status=$(/usr/bin/clq $mode -query 'releases[0].status' $changelog)
+release_status="$(clq -query 'releases[0].status' "$changelog")"
 
-release_changes="$(/usr/bin/clq $mode -output md -query 'releases[0].changes[]/' $changelog)"
+release_changes="$(clq -output md -query 'releases[0].changes[]/' "$changelog" | sed 's/\n/%0A/g')"
 
-echo "::set-output name=changes::${release_changes//$'\n'/'%0A'}"
+echo "::set-output name=changes::$release_changes"
 echo "::set-output name=name::$release_name"
 echo "::set-output name=status::$release_status"
 echo "::set-output name=tag::$release_tag"

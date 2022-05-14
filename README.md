@@ -10,11 +10,17 @@ GitHub action for the changelog query tool ([clq](https://github.com/denisa/clq)
 ## Inputs
 
 ### `changelog`
-The name of the changelog file. Default to `"CHANGELOG.md"`
+The name of the changelog file. Default to `CHANGELOG.md`
+
+### `changeMap`
+Optional, the path to a file describing how to map change kind (Added, Changed, Fixed, ...)
+to a version increment (`major`, `minor`, `patch`). The path is relative to the root of the
+project.
+See (clq documentation)[https://github.com/denisa/clq#validation].
 
 ### `mode`
-The validation mode, one of `"feature"` or `"release"`. Default to `"release"`.
-The `"feature"` mode validates the syntax and the release ordering; the `"release"` mode
+The validation mode, one of `feature` or `release`. Default to `release`.
+The `feature` mode validates the syntax and the release ordering; the `release` mode
 further enforces that the top-most entry has a release version.
 
 ## Outputs
@@ -24,15 +30,15 @@ All the outputs comes from the top-most entry in the changelog
 The release version.
 
 ### `tag`
-The release version as a tag, that is the version prefixed with a `"v"`.
+The release version as a tag, that is the version prefixed with a `v`.
 
 ### `name`
-The title of the release, it defaults to `"Release"` followed by the version, unless
+The title of the release, it defaults to `Release` followed by the version, unless
 the release has a _label_ in the changelog.
 Please see [clq](https://github.com/denisa/clq/blob/main/README.md) for more details.
 
 ### `status`
-The status of the release, one of `"prereleased"`, `"released"`, `"unreleased"`, or `"yanked"`.
+The status of the release, one of `prereleased`, `released`, `unreleased`, or `yanked`.
 
 ### `changes`
 All the changes defined for that release. Intended to be used for GitHub’s _release description_.

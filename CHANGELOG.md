@@ -6,7 +6,7 @@
 
 Keep the newest entry at top, format date according to ISO 8601: `YYYY-MM-DD`.
 
-Categories:
+Categories, defined in [changemap.json](.github/clq/changemap.json)):
 - _major_ release trigger:
    - `Changed` for changes in existing functionality.
    - `Removed` for now removed features.
@@ -17,7 +17,12 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
-## [1.1.4] - 2022-05-11
+## [1.2.0] - 2022-05-13
+### Added
+- Use option changeMap to specify a changeMap to use instead of the default.
+- A custom changemap.json for use by the CHANGELOG.md, and rewrite the category changes
+  to conform.
+
 ### Fixed
 - Bump denisa/clq from 1.6.2-alpine to 1.6.3-alpine
 
@@ -36,7 +41,7 @@ Categories:
 - Examples in the README were not referencing the action
 
 ## [1.1.0] - 2022-04-29
-### Changed
+### Added
 - create all tags (major/minor/patch, major/minor, major)
 
 ### Fixed
