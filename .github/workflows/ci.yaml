@@ -16,6 +16,7 @@ jobs:
       uses: ./
       id: clq-validate
       with:
+        changeMap: .github/clq/changemap.json
         mode: feature
     - name: Echo changelog values
       run: |
@@ -36,6 +37,7 @@ jobs:
       uses: ./
       id: clq-extract
       with:
+        changeMap: .github/clq/changemap.json
         mode: release
     - name: Validate the tag has not yet been used
       env:
@@ -53,6 +55,8 @@ jobs:
     - uses: actions/checkout@v3.0.2
     - uses: ./
       id: clq-extract
+      with:
+        changeMap: .github/clq/changemap.json
     - name: Create tags
       env:
         tag: ${{ steps.clq-extract.outputs.tag }}

@@ -5,6 +5,10 @@ inputs:
                 description: 'name of the changelog file'
                 required: false
                 default: 'CHANGELOG.md'
+        changeMap:
+                description: 'A configuration file that defines a custom mapping from change kind to version increment.'
+                required: false
+                default: ''
         mode:
                 description: 'validation mode for the changelog, one of "release" or "feature"'
                 required: false
@@ -26,4 +30,5 @@ runs:
         args:
                 - ${{ inputs.mode }}
                 - ${{ inputs.changelog }}
+                - ${{ inputs.changeMap }}
 
