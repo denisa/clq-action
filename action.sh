@@ -53,7 +53,7 @@ fi
 
 release_status="$(clq -query 'releases[0].status' "$changelog")"
 
-release_changes="$(clq -output md -query 'releases[0].changes[]/' "$changelog" | sed -e :a -e N -e '$!ba' -e 's/\n/%0A/g')"
+release_changes="$(clq -output md -query 'releases[0].changes[]/' "$changelog" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/%0A/g')"
 
 echo "::set-output name=changes::$release_changes"
 echo "::set-output name=name::$release_name"
