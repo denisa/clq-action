@@ -6,7 +6,7 @@ added-is-major: docker-build
 		-v "$(CURDIR)/test/changelog/added-is-major.md:/home/CHANGELOG.md:ro" \
 		denisa/clq-action feature /home/CHANGELOG.md \
 		> build/added-is-major
-	diff test/expected/added-is-major build/added-is-major
+	diff -y test/expected/added-is-major build/added-is-major
 
 .PHONY: added-is-minor
 added-is-minor: docker-build
@@ -17,7 +17,7 @@ added-is-minor: docker-build
 		-v "$(CURDIR)/test/changemap/added-is-minor.json:/home/changemap.json:ro" \
 		denisa/clq-action feature /home/CHANGELOG.md /home/changemap.json \
 		> build/added-is-minor
-	diff test/expected/added-is-minor build/added-is-minor
+	diff -y test/expected/added-is-minor build/added-is-minor
 
 .PHONY: docker-test
 docker-test: added-is-major added-is-minor
