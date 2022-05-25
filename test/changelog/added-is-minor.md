@@ -13,8 +13,8 @@ Categories:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
-## [2.0.0] - 2022-04-29
-### Changed
+## [1.1.0] - 2022-04-29
+### Added
 - create all tags (major/minor/patch, major/minor, major)
 
 ## [1.0.1] - 2020-07-23
