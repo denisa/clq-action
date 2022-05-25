@@ -17,6 +17,10 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.2.1] - 2022-05-25
+### Fixed
+- Properly joins all lines in the body with an escaped newline %0A
+
 ## [1.2.0] - 2022-05-13
 ### Added
 - Use option changeMap to specify a changeMap to use instead of the default.

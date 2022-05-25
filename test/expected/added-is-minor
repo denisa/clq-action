@@ -1,0 +1,5 @@
+::set-output name=changes::### Changed%0A- create all tags (major/minor/patch, major/minor, major)
+::set-output name=name::Release 2.0.0
+::set-output name=status::released
+::set-output name=tag::v2.0.0
+::set-output name=version::2.0.0
