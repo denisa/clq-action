@@ -17,6 +17,11 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.2.2] - 2022-08-30
+### Fixed
+- bump denisa/clq from 1.6.3-alpine to 1.7.1-alpine
+- minor documentation improvements
+
 ## [1.2.1] - 2022-05-25
 ### Fixed
 - Properly joins all lines in the body with an escaped newline %0A

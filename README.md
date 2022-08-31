@@ -1,6 +1,6 @@
 # clq-action
+![GitHub Release Date](https://img.shields.io/github/release-date/denisa/clq-action?color=blue)
 [![version](https://img.shields.io/github/v/release/denisa/clq-action?include_prereleases&sort=semver)](https://github.com/denisa/clq-action/releases)
-[![semantic versioning](https://img.shields.io/badge/semantic%20versioning-2.0.0-informational)](https://semver.org/spec/v2.0.0.html)
 
 GitHub action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
@@ -16,7 +16,7 @@ The name of the changelog file. Default to `CHANGELOG.md`
 Optional, the path to a file describing how to map change kind (Added, Changed, Fixed, ...)
 to a version increment (`major`, `minor`, `patch`). The path is relative to the root of the
 project.
-See (clq documentation)[https://github.com/denisa/clq#validation].
+See [clq documentation](https://github.com/denisa/clq#validation).
 
 ### `mode`
 The validation mode, one of `feature` or `release`. Default to `release`.
