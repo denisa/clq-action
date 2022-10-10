@@ -84,7 +84,7 @@ jobs:
         git push origin "${tags[0]}"
         # move all other tags
         git push origin --force "${tags[@]:1}"
-    - uses: ncipollo/release-action@v1.10.0
+    - uses: ncipollo/release-action@v1.11.1
       with:
         tag: ${{ steps.clq-extract.outputs.tag }}
         prerelease: ${{ steps.clq-extract.outputs.status == 'prereleased' }}
