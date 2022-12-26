@@ -18,6 +18,16 @@ to a version increment (`major`, `minor`, `patch`). The path is relative to the 
 project.
 See [clq documentation](https://github.com/denisa/clq#validation).
 
+### `dockerProxy`
+Optional, a prefix to the name of the `denisa/clq` docker image. This let docker access the
+image through a proxy, which is handy to bypass dockerhub’s rate limiting.
+
+Assuming for example a private instance of artifactory `artifactory.antonio.li`
+[setup to proxy](https://jfrog.com/knowledge-base/how-to-configure-a-remote-repository-in-artifactory-to-proxy-a-private-docker-registry-in-docker-hub/)
+docker images as a virtual `docker` repository, set `dockerProxy` to `artifactory.antonio.li/docker/`.
+
+An alternative to that option would be to [configure the Docker daemon ](https://docs.docker.com/registry/recipes/mirror/#configure-the-docker-daemon) to use a mirror.
+
 ### `mode`
 The validation mode, one of `feature` or `release`. Default to `release`.
 The `feature` mode validates the syntax and the release ordering; the `release` mode

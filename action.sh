@@ -1,14 +1,20 @@
-#!/bin/ash -l
-# shellcheck shell=dash
+#!/usr/bin/env bash
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
 clq() {
-  [ -n "$mode" ] && set -- "$mode" "$@"
-  [ -n "$changeMap" ] && set -- "-changeMap" "$changeMap" "$@"
-  /usr/bin/clq "$@"
+  volumes=("-v" "$changeLog:/home/CHANGELOG.md:ro")
+  if [ -n "$mode" ]; then
+    set -- "$mode" "$@"
+  fi
+  if [ -n "$changeMap" ]; then
+    set -- "-changeMap" "/home/changemap.json" "$@"
+    volumes+=("-v" "$changeMap:/home/changemap.json:ro")
+  fi
+
+  docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.7.3" "$@" /home/CHANGELOG.md
 }
 
 mode=$1
@@ -26,15 +32,15 @@ case "$mode" in
    ;;
 esac
 
-changelog=$1
+changeLog=$(realpath "$1")
 shift
-if ! [ -r "$changelog" ]; then
-  echo "::error ::changelog $changelog is not readable"
+if ! [ -r "$changeLog" ]; then
+  echo "::error ::changeLog $changeLog is not readable"
   exit 1
 fi
 
 if [ "$#" -eq 1 ]; then
-  changeMap="$1"
+  changeMap=$(realpath "$1")
   shift
   if ! [ -r "$changeMap" ]; then
     echo "::error ::changeMap $changeMap is not readable"
@@ -43,17 +49,17 @@ if [ "$#" -eq 1 ]; then
 else
   changeMap=''
 fi
-release_version="$(clq -query 'releases[0].version' "$changelog")"
+release_version="$(clq -query 'releases[0].version')"
 release_tag="v${release_version}"
 
-release_name="$(clq -query 'releases[0].label' "$changelog")"
+release_name="$(clq -query 'releases[0].label')"
 if [ -z "$release_name" ]; then
    release_name="Release $release_version"
 fi
 
-release_status="$(clq -query 'releases[0].status' "$changelog")"
+release_status="$(clq -query 'releases[0].status')"
 
-release_changes="$(clq -output md -query 'releases[0].changes[]/' "$changelog" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/%0A/g')"
+release_changes="$(clq -output md -query 'releases[0].changes[]/' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/%0A/g')"
 
 echo "::set-output name=changes::$release_changes"
 echo "::set-output name=name::$release_name"

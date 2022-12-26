@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3.2.0
-    - run: make docker-test
+    - run: make test
     - name: Validate the changelog
       uses: ./
       id: clq-validate
