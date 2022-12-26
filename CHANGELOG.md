@@ -22,6 +22,9 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
 - The new optional argument `dockerProxy` makes it possible to fetch the clq docker image
   through a proxy and bypass rate limiting.
 
+### Fixed
+- use denisa/semantic-tag-helper
+
 ## [1.2.3] - 2022-12-26
 ### Fixed
 - Bump denisa/clq from 1.7.1-alpine to 1.7.3-alpine

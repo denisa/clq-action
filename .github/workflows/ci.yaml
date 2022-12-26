@@ -39,14 +39,10 @@ jobs:
       with:
         changeMap: .github/clq/changemap.json
         mode: release
-    - name: Validate the tag has not yet been used
-      env:
-        TAG: ${{ steps.clq-extract.outputs.tag }}
-      run: |
-        if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
-          echo "::error ::tag $TAG exists already"
-          exit 1
-        fi
+    - uses: denisa/semantic-tag-helper@v1
+      with:
+        mode: test
+        tag: ${{ steps.clq-extract.outputs.tag }}
   tag:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [ test, validate-release ]
@@ -57,33 +53,10 @@ jobs:
       id: clq-extract
       with:
         changeMap: .github/clq/changemap.json
-    - name: Create tags
-      env:
+    - uses: denisa/semantic-tag-helper@v1
+      with:
+        mode: set
         tag: ${{ steps.clq-extract.outputs.tag }}
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-
-        version="${tag%%-*}"
-        preversion="${tag##*-}"
-        if [ "$version" != "$preversion" ]; then
-          prefix="${version}-"
-          tag="$preversion"
-        fi
-
-        tags=()
-        before=''
-        until [ "$before" = "$tag" ]; do
-          tags+=("${prefix:-}${tag}")
-          git tag "${tags[-1]}"
-          before="$tag"
-          tag="${tag%.*}"
-        done
-
-        # ensure this tag doesn't exist
-        git push origin "${tags[0]}"
-        # move all other tags
-        git push origin --force "${tags[@]:1}"
     - uses: ncipollo/release-action@v1.12.0
       with:
         tag: ${{ steps.clq-extract.outputs.tag }}
