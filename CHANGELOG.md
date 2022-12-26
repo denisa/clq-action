@@ -21,6 +21,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
 ### Fixed
 - Bump denisa/clq from 1.7.1-alpine to 1.7.3-alpine
 - Bump koalaman/shellcheck from v0.8.0 to v0.9.0
+- Bump ncipollo/release-action from 1.10.0 to 1.12.0
 
 ## [1.2.2] - 2022-08-30
 ### Fixed
