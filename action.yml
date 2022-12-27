@@ -9,6 +9,10 @@ inputs:
                 description: 'A configuration file that defines a custom mapping from change kind to version increment.'
                 required: false
                 default: ''
+        dockerProxy:
+                description: 'A proxy for dockerhub'
+                required: false
+                default: ''
         mode:
                 description: 'validation mode for the changelog, one of "release" or "feature"'
                 required: false
@@ -16,19 +20,24 @@ inputs:
 outputs:
         version:
                 description: 'The release version'
+                value: ${{ steps.clq.outputs.version }}
         tag:
                 description: 'The tag to apply, the version prefixed with a "v"'
+                value: ${{ steps.clq.outputs.tag }}
         name:
                 description: 'The release name'
+                value: ${{ steps.clq.outputs.name }}
         status:
                 description: 'The status of the release (prereleased, released, unreleased, yanked)'
+                value: ${{ steps.clq.outputs.status }}
         changes:
                 description: 'all the changes for that release'
+                value: ${{ steps.clq.outputs.changes }}
 runs:
-        using: 'docker'
-        image: 'Dockerfile'
-        args:
-                - ${{ inputs.mode }}
-                - ${{ inputs.changelog }}
-                - ${{ inputs.changeMap }}
-
+        using: 'composite'
+        steps:
+            - id: clq
+              run: ${{ github.action_path }}/action.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+              shell: bash
+              env:
+                DOCKER_PROXY: ${{ inputs.dockerProxy }}
