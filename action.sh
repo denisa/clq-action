@@ -3,6 +3,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 clq() {
   volumes=("-v" "$changeLog:/home/CHANGELOG.md:ro")
@@ -14,9 +15,8 @@ clq() {
     volumes+=("-v" "$changeMap:/home/changemap.json:ro")
   fi
 
-  set -x
   docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.7.3" "$@" /home/CHANGELOG.md
-  set +x
+
 }
 
 mode=$1
