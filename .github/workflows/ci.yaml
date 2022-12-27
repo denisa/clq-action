@@ -20,6 +20,7 @@ jobs:
         mode: feature
     - name: Echo changelog values
       run: |
+        set -u
         echo "$release_name"
         echo "$release_tag -- $release_status"
         echo "$body"
