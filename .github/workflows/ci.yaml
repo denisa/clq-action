@@ -20,10 +20,9 @@ jobs:
         mode: feature
     - name: Echo changelog values
       run: |
-        set -u
-        echo "$release_name"
-        echo "$release_tag -- $release_status"
-        echo "$body"
+        echo "${release_name:?}"
+        echo "${release_tag:?} -- ${release_status:?}"
+        echo "${body:?}"
       env:
         release_tag: ${{ steps.clq-validate.outputs.tag }}
         release_name: ${{ steps.clq-validate.outputs.name }}
