@@ -20,18 +20,24 @@ inputs:
 outputs:
         version:
                 description: 'The release version'
+                value: ${{ steps.clq.outputs.version }}
         tag:
                 description: 'The tag to apply, the version prefixed with a "v"'
+                value: ${{ steps.clq.outputs.tag }}
         name:
                 description: 'The release name'
+                value: ${{ steps.clq.outputs.name }}
         status:
                 description: 'The status of the release (prereleased, released, unreleased, yanked)'
+                value: ${{ steps.clq.outputs.status }}
         changes:
                 description: 'all the changes for that release'
+                value: ${{ steps.clq.outputs.changes }}
 runs:
         using: 'composite'
         steps:
-            - run: ${{ github.action_path }}/action.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+            - id: clq
+              run: ${{ github.action_path }}/action.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
               shell: bash
               env:
                 DOCKER_PROXY: ${{ inputs.dockerProxy }}

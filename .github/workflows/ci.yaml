@@ -20,14 +20,14 @@ jobs:
         mode: feature
     - name: Echo changelog values
       run: |
-        echo "${release_name:?}"
-        echo "${release_tag:?} -- ${release_status:?}"
-        echo "${body:?}"
+        echo "${name:?}"
+        echo "${tag:?} -- ${status:?}"
+        echo "${changes:?}"
       env:
-        release_tag: ${{ steps.clq-validate.outputs.tag }}
-        release_name: ${{ steps.clq-validate.outputs.name }}
-        release_status: ${{ steps.clq-validate.outputs.status }}
-        body: ${{ steps.clq-validate.outputs.changes }}
+        tag: ${{ steps.clq-validate.outputs.tag }}
+        name: ${{ steps.clq-validate.outputs.name }}
+        status: ${{ steps.clq-validate.outputs.status }}
+        changes: ${{ steps.clq-validate.outputs.changes }}
   validate-release:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
