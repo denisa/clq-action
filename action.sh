@@ -61,8 +61,8 @@ release_status="$(clq -query 'releases[0].status')"
 
 release_changes="$(clq -output md -query 'releases[0].changes[]/' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/%0A/g')"
 
-echo "::set-output name=changes::$release_changes"
-echo "::set-output name=name::$release_name"
-echo "::set-output name=status::$release_status"
-echo "::set-output name=tag::$release_tag"
-echo "::set-output name=version::$release_version"
+echo "changes=$release_changes" >> "${GITHUB_OUTPUT}"
+echo "name=$release_name" >> "${GITHUB_OUTPUT}"
+echo "status=$release_status" >> "${GITHUB_OUTPUT}"
+echo "tag=$release_tag" >> "${GITHUB_OUTPUT}"
+echo "version=$release_version" >> "${GITHUB_OUTPUT}"
