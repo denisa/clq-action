@@ -2,18 +2,16 @@
 added-is-major: shellcheck
 	mkdir -p build
 	rm -f build/added-is-major
-	DOCKER_PROXY='' ./action.sh feature \
-		test/changelog/added-is-major.md \
-		> build/added-is-major
+	DOCKER_PROXY='' GITHUB_OUTPUT='build/added-is-major' ./action.sh feature \
+		test/changelog/added-is-major.md
 	diff -U3 test/expected/added-is-major build/added-is-major
 
 .PHONY: added-is-minor
 added-is-minor: shellcheck
 	mkdir -p build
 	rm -f build/added-is-minor
-	DOCKER_PROXY='' ./action.sh feature \
-		test/changelog/added-is-minor.md test/changemap/added-is-minor.json \
-		> build/added-is-minor
+	DOCKER_PROXY='' GITHUB_OUTPUT='build/added-is-minor' ./action.sh feature \
+		test/changelog/added-is-minor.md test/changemap/added-is-minor.json
 	diff -U3 test/expected/added-is-minor build/added-is-minor
 
 .PHONY: test
