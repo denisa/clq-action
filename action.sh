@@ -54,15 +54,17 @@ release_tag="v${release_version}"
 
 release_name="$(clq -query 'releases[0].label')"
 if [ -z "$release_name" ]; then
-   release_name="Release $release_version"
+  release_name="Release $release_version"
 fi
 
 release_status="$(clq -query 'releases[0].status')"
 
 release_changes="$(clq -output md -query 'releases[0].changes[]/' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/%0A/g')"
 
-echo "::set-output name=changes::$release_changes"
-echo "::set-output name=name::$release_name"
-echo "::set-output name=status::$release_status"
-echo "::set-output name=tag::$release_tag"
-echo "::set-output name=version::$release_version"
+{
+  echo "changes=$release_changes"
+  echo "name=$release_name"
+  echo "status=$release_status"
+  echo "tag=$release_tag"
+  echo "version=$release_version"
+} >> "${GITHUB_OUTPUT}"

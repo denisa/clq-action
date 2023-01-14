@@ -17,6 +17,11 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.3.1] - 2023-01-14
+### Fixed
+- convert from `::set-output` to `>> $GITHUB_OUTPUT` as per [deprecation notice](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
+- track actions’ major version changes only
+
 ## [1.3.0] - 2022-12-26
 ### Added
 - The new optional argument `dockerProxy` makes it possible to fetch the clq docker image
