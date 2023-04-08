@@ -1,22 +1,26 @@
-.PHONY: added-is-major
-added-is-major: shellcheck
-	mkdir -p build
-	rm -f build/added-is-major
-	DOCKER_PROXY='' GITHUB_OUTPUT='build/added-is-major' ./action.sh feature \
-		test/changelog/added-is-major.md
-	diff -U3 test/expected/added-is-major build/added-is-major
+SHELL = /bin/bash
 
-.PHONY: added-is-minor
-added-is-minor: shellcheck
-	mkdir -p build
-	rm -f build/added-is-minor
-	DOCKER_PROXY='' GITHUB_OUTPUT='build/added-is-minor' ./action.sh feature \
-		test/changelog/added-is-minor.md test/changemap/added-is-minor.json
-	diff -U3 test/expected/added-is-minor build/added-is-minor
+TARGET_TEST_FILE:=added-is-major added-is-minor
 
 .PHONY: test
-test: added-is-major added-is-minor
+test: ${TARGET_TEST_FILE}
+
+.PHONY: ${TARGET_TEST_FILE}
+${TARGET_TEST_FILE}:%: shellcheck
+	mkdir -p build
+	rm -f build/$*
+	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./action.sh feature \
+		test/changelog/$*.md $(wildcard test/changemap/$*.json)
+	diff -U3 \
+		<( grep -vE '(changes<<)?[a-zA-Z0-9+/=]{20}' test/expected/$* ) \
+		<( grep -vE '(changes<<)?[a-zA-Z0-9+/=]{20}' build/$* )
 
 .PHONY: shellcheck
 shellcheck:
 	docker run --rm -v "$(CURDIR):/mnt" koalaman/shellcheck:v0.9.0 action.sh
+
+.PHONY: versions
+versions:
+	diff --version
+	docker --version
+	grep --version

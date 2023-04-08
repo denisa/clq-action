@@ -20,6 +20,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
 ## [1.3.2] - 2023-04-08
 ### Fixed
 - Bump denisa/clq from 1.7.3 to 1.7.10
+- Handle multi-line output to $GITHUB_OUTPUT
 
 ## [1.3.1] - 2023-01-14
 ### Fixed
