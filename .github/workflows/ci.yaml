@@ -11,7 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: make versions
     - run: make test
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: build/
     - name: Validate the changelog
       uses: ./
       id: clq-validate

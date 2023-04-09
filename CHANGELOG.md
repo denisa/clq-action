@@ -17,6 +17,11 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.3.2] - 2023-04-08
+### Fixed
+- Bump denisa/clq from 1.7.3 to 1.7.10
+- Handle multi-line output to $GITHUB_OUTPUT
+
 ## [1.3.1] - 2023-01-14
 ### Fixed
 - convert from `::set-output` to `>> $GITHUB_OUTPUT` as per [deprecation notice](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)

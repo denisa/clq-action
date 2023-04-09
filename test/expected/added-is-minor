@@ -1,4 +1,7 @@
-changes=### Changed%0A- create all tags (major/minor/patch, major/minor, major)
+changes<<tmMd6TcKrlvGH4hIm+/=
+### Changed
+- create all tags (major/minor/patch, major/minor, major)
+tmMd6TcKrlvGH4hIm+/=
 name=Release 2.0.0
 status=released
 tag=v2.0.0
