@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - run: make versions
     - run: make test
     - uses: actions/upload-artifact@v3
@@ -38,7 +38,7 @@ jobs:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Extract tag from the changelog
       uses: ./
       id: clq-extract
@@ -54,7 +54,7 @@ jobs:
     needs: [ test, validate-release ]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ./
       id: clq-extract
       with:
