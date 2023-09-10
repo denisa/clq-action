@@ -60,55 +60,51 @@ This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
 ```yaml
     - name: Validate the changelog
-      uses: denisa/clq-action@v1.1
+      uses: denisa/clq-action@v1
       with:
         mode: feature
 ```
 
 ### Pull-request
-This build must ensure that the changelog introduces a new release version.
+This build ensures that the changelog introduces a new release version.
 Use as
 ```yaml
+  validate-release:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
     - name: Extract tag from the changelog
-      uses: denisa/clq-action@v1.1
+      uses: denisa/clq-action@v1
       id: clq-extract
       with:
         mode: release
     - name: Validate the tag has not yet been used
-      env:
-        TAG: ${{ steps.clq-extract.outputs.tag }}
-      run: |
-        if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
-          echo "::error ::tag $TAG exists already"
-          exit 1
+      uses: denisa/semantic-tag-helper@v1
+      with:
+        mode: test
+        tag: ${{ steps.clq-extract.outputs.tag }}xit 1
         fi
 ```
 
 ### Release Branch
-This build must extract from the changelog all the information needed to cut a new release.
+This build extracts from the changelog all the information needed to cut a new release.
 Use
 ```yaml
-    - uses: actions/checkout@v3.0.2
-    - uses: denisa/clq-action@v1.1
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ validate-release ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: denisa/clq-action@v1
       id: clq-extract
-    - name: Create tags
-      env:
-        tag_name: ${{ steps.clq-extract.outputs.tag }}
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-
-        tags=()
-        before_tag_name='v'
-        until [ "$before_tag_name" = "$tag_name" ]; do
-          tags+=("$tag_name")
-          git tag "$tag_name"
-          before_tag_name="$tag_name"
-          tag_name="${tag_name%.*}"
-        done
-        git push origin "${tags[0]}"
-        git push origin --force "${tags[@]:1}"
-    - uses: ncipollo/release-action@v1.10.0
+    - name: Create the tag
+      uses: denisa/semantic-tag-helper@v1
+      with:
+        mode: set
+        tag: ${{ steps.clq-extract.outputs.tag }}
+    - uses: ncipollo/release-action@v1
       with:
         tag: ${{ steps.clq-extract.outputs.tag }}
         prerelease: ${{ steps.clq-extract.outputs.status == 'prereleased' }}
