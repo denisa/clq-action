@@ -17,6 +17,11 @@ Categories, defined in [changemap.json](.github/clq/changemap.json)):
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 
+## [1.3.4] - 2023-09-09
+### Fixed
+- Improve sample jobs in the README.md
+- Bump denisa/clq from 1.7.10 to 1.7.11
+
 ## [1.3.3] - 2023-09-05
 ### Fixed
 - Bump actions/checkout from 3 to 4
