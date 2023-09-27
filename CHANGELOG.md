@@ -15,7 +15,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Added` for new features.
   - `Deprecated` for soon-to-be removed features.
 - *bugfix* release trigger:
-  - `Fixed` for any bug fixes.
+  - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
 ## [1.3.5] - 2023-09-27

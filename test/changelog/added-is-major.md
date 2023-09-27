@@ -11,7 +11,7 @@ Categories:
   - `Changed` for changes in existing functionality.
   - `Deprecated` for soon-to-be removed features.
 - *bugfix* release trigger:
-  - `Fixed` for any bug fixes.
+  - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
 ## [1.1.0] - 2022-04-29
