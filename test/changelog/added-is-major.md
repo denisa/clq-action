@@ -14,13 +14,19 @@ Categories:
   - `Security` in case of vulnerabilities.
 
 ## [1.1.0] - 2022-04-29
+
 ### Changed
+
 - create all tags (major/minor/patch, major/minor, major)
 
 ## [1.0.1] - 2020-07-23
+
 ### Fixed
+
 - removed steps to publish clq binaries from workflows
 
 ## [1.0.0] - 2020-07-23
+
 ### Added
+
 - clq action
