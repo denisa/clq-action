@@ -10,7 +10,7 @@ Categories:
 - *minor* release trigger:
   - `Changed` for changes in existing functionality.
   - `Deprecated` for soon-to-be removed features.
-- *bug-fix* release trigger:
+- *bugfix* release trigger:
   - `Fixed` for any bug fixes.
   - `Security` in case of vulnerabilities.
 
