@@ -100,7 +100,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- rename github branch to `main`
+- rename GitHub branch to `main`
 
 ## [1.1.2] - 2022-05-07
 
