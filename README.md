@@ -6,8 +6,6 @@
 GitHub action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
 
-
-
 ## Inputs
 
 ### `changelog`

@@ -3,6 +3,7 @@
 This changelog uses the original built-in categories, and is here for testing purpose only.
 
 Categories:
+
 - *major* release trigger:
   - `Changed` for changes in existing functionality.
   - `Removed` for now removed features.
