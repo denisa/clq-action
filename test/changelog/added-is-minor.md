@@ -4,14 +4,14 @@ This changelog uses the original built-in categories, and is here for testing pu
 
 Categories:
 - *major* release trigger:
-   - `Changed` for changes in existing functionality.
-   - `Removed` for now removed features.
+  - `Changed` for changes in existing functionality.
+  - `Removed` for now removed features.
 - *minor* release trigger:
-   - `Added` for new features.
-   - `Deprecated` for soon-to-be removed features.
+  - `Added` for new features.
+  - `Deprecated` for soon-to-be removed features.
 - *bug-fix* release trigger:
-   - `Fixed` for any bug fixes.
-   - `Security` in case of vulnerabilities.
+  - `Fixed` for any bug fixes.
+  - `Security` in case of vulnerabilities.
 
 ## [2.0.0] - 2022-04-29
 ### Changed
