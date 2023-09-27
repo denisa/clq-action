@@ -1,4 +1,4 @@
-# Keep the newest entry at top, format date according to ISO 8601: `YYYY-MM-DD`.
+# Keep the newest entry at top, format date according to ISO 8601: `YYYY-MM-DD`
 
 This changelog uses the original built-in categories, and is here for testing purpose only.
 
