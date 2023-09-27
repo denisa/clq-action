@@ -3,13 +3,13 @@
 This changelog uses the original built-in categories, and is here for testing purpose only.
 
 Categories:
-- _major_ release trigger:
+- *major* release trigger:
    - `Changed` for changes in existing functionality.
    - `Removed` for now removed features.
-- _minor_ release trigger:
+- *minor* release trigger:
    - `Added` for new features.
    - `Deprecated` for soon-to-be removed features.
-- _bug-fix_ release trigger:
+- *bug-fix* release trigger:
    - `Fixed` for any bug fixes.
    - `Security` in case of vulnerabilities.
 

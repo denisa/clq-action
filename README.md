@@ -44,14 +44,14 @@ The release version as a tag, that is the version prefixed with a `v`.
 
 ### `name`
 The title of the release, it defaults to `Release` followed by the version, unless
-the release has a _label_ in the changelog.
+the release has a *label* in the changelog.
 Please see [clq](https://github.com/denisa/clq/blob/main/README.md) for more details.
 
 ### `status`
 The status of the release, one of `prereleased`, `released`, `unreleased`, or `yanked`.
 
 ### `changes`
-All the changes defined for that release. Intended to be used for GitHub’s _release description_.
+All the changes defined for that release. Intended to be used for GitHub’s *release description*.
 
 ## Example Usage
 
@@ -83,8 +83,7 @@ Use as
       uses: denisa/semantic-tag-helper@v1
       with:
         mode: test
-        tag: ${{ steps.clq-extract.outputs.tag }}xit 1
-        fi
+        tag: ${{ steps.clq-extract.outputs.tag }}
 ```
 
 ### Release Branch
