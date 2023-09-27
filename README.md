@@ -68,6 +68,7 @@ All the changes defined for that release. Intended to be used for GitHub’s *re
 
 This build only needs to validate that the changelog is syntactically correct.
 To that effect, add
+
 ```yaml
     - name: Validate the changelog
       uses: denisa/clq-action@v1
@@ -79,6 +80,7 @@ To that effect, add
 
 This build ensures that the changelog introduces a new release version.
 Use as
+
 ```yaml
   validate-release:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
@@ -101,6 +103,7 @@ Use as
 
 This build extracts from the changelog all the information needed to cut a new release.
 Use
+
 ```yaml
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
