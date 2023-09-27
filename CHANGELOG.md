@@ -113,7 +113,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- create all tags include pre-release version
+- create all tags include prerelease version
 - Examples in the README were not referencing the action
 
 ## [1.1.0] - 2022-04-29
