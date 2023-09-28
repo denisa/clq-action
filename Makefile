@@ -3,10 +3,10 @@ SHELL = /bin/bash
 TARGET_TEST_FILE:=added-is-major added-is-minor
 
 .PHONY: test
-test: ${TARGET_TEST_FILE}
+test: ${TARGET_TEST_FILE} $(if $(findstring $(CI),true),,shellcheck)
 
 .PHONY: ${TARGET_TEST_FILE}
-${TARGET_TEST_FILE}:%: shellcheck
+${TARGET_TEST_FILE}:%:
 	mkdir -p build
 	rm -f build/$*
 	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./action.sh feature \
@@ -19,15 +19,15 @@ ${TARGET_TEST_FILE}:%: shellcheck
 shellcheck:
 	docker run --rm -v "$(CURDIR):/mnt" koalaman/shellcheck:v0.9.0 action.sh
 
-.PHONY: versions
-versions:
-	diff --version
-	docker --version
-	grep --version
-
 superlinter:
 	docker run --rm \
 		-e RUN_LOCAL=true \
 		--env-file ".github/super-linter.env" \
 		-w /tmp/lint -v "$$PWD":/tmp/lint \
 		github/super-linter:v5
+
+.PHONY: versions
+versions:
+	diff --version
+	docker --version
+	grep --version

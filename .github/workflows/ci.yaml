@@ -7,6 +7,14 @@ on:
       - '*'
   pull_request:
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cat .github/super-linter.env >> "$GITHUB_ENV"
+      - uses: super-linter/super-linter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +59,7 @@ jobs:
         tag: ${{ steps.clq-extract.outputs.tag }}
   tag:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [ test, validate-release ]
+    needs: [ lint, test, validate-release ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
