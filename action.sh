@@ -26,10 +26,10 @@ case "${mode}" in
   feature)
     mode=''
     ;;
-   *)
-   echo "::error ::Mode ${mode} undefined, must be one of (feature|release)"
-   exit 1
-   ;;
+  *)
+    echo "::error ::Mode ${mode} undefined, must be one of (feature|release)"
+    exit 1
+    ;;
 esac
 
 changeLog=$(realpath "$1")
