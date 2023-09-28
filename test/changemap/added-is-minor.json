@@ -5,5 +5,4 @@
     {"name":"Fixed", "increment":"patch"},
     {"name":"Removed", "increment":"major"},
     {"name":"Security", "increment":"patch"}
-  ]
-  
+]
