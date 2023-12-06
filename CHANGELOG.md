@@ -18,6 +18,12 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.0] - 2023-12-05
+
+### Added
+
+- Update clq to 1.8.1 so that the generated changelog can now inlcude emoji.
+
 ## [1.3.5] - 2023-09-27
 
 ### Fixed
