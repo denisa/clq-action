@@ -18,6 +18,12 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.1] - 2024-01-20
+
+### Fixed
+
+- Bump actions/upload-artifact from 3 to 4
+
 ## [1.4.0] - 2023-12-05
 
 ### Added
