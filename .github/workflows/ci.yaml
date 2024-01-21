@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v4
     - run: make versions
     - run: make test
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
