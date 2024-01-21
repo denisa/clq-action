@@ -23,12 +23,14 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump actions/upload-artifact from 3 to 4
+- Define emoji to include in the release notes
+- Capitalize all change items in this changelog
 
 ## [1.4.0] - 2023-12-05
 
 ### Added
 
-- Update clq to 1.8.1 so that the generated changelog can now inlcude emoji.
+- Update clq to 1.8.1 so that the generated changelog can now include emoji.
 
 ## [1.3.5] - 2023-09-27
 
@@ -60,8 +62,8 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- convert from `::set-output` to `>> $GITHUB_OUTPUT` as per [deprecation notice](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
-- track actions’ major version changes only
+- Convert from `::set-output` to `>> $GITHUB_OUTPUT` as per [deprecation notice](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
+- Track actions’ major version changes only
 
 ## [1.3.0] - 2022-12-26
 
@@ -72,7 +74,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- use denisa/semantic-tag-helper
+- Use denisa/semantic-tag-helper
 
 ## [1.2.3] - 2022-12-26
 
@@ -87,8 +89,8 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- bump denisa/clq from 1.6.3-alpine to 1.7.1-alpine
-- minor documentation improvements
+- Bump denisa/clq from 1.6.3-alpine to 1.7.1-alpine
+- Minor documentation improvements
 
 ## [1.2.1] - 2022-05-25
 
@@ -112,49 +114,49 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- rename GitHub branch to `main`
+- Rename GitHub branch to `main`
 
 ## [1.1.2] - 2022-05-07
 
 ### Fixed
 
 - When creating all tags, creates either version or (tries to create) prerelease tags
-- bump denisa/clq from 1.6.1-alpine to 1.6.2-alpine
+- Bump denisa/clq from 1.6.1-alpine to 1.6.2-alpine
 
 ## [1.1.1] - 2022-04-30
 
 ### Fixed
 
-- create all tags include prerelease version
+- Create all tags include prerelease version
 - Examples in the README were not referencing the action
 
 ## [1.1.0] - 2022-04-29
 
 ### Added
 
-- create all tags (major/minor/patch, major/minor, major)
+- Create all tags (major/minor/patch, major/minor, major)
 
 ### Fixed
 
-- add .editconfig
-- bump actions/checkout from 2.3.1 to 3.0.2
-- bump denisa/clq from 1.3.0-alpine to 1.6.1-alpine
-- change to ncipollo/release-action
+- Add .editconfig
+- Bump actions/checkout from 2.3.1 to 3.0.2
+- Bump denisa/clq from 1.3.0-alpine to 1.6.1-alpine
+- Change to ncipollo/release-action
 
 ## [1.0.2] - 2020-07-25
 
 ### Fixed
 
-- examples have the proper `uses:` statement
+- Examples have the proper `uses:` statement
 
 ## [1.0.1] - 2020-07-23
 
 ### Fixed
 
-- removed steps to publish clq binaries from workflows
+- Removed steps to publish clq binaries from workflows
 
 ## [1.0.0] - 2020-07-23
 
 ### Added
 
-- clq action
+- Initial clq action
