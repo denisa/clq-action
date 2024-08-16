@@ -3,7 +3,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/denisa/clq-action?color=blue)
 [![version](https://img.shields.io/github/v/release/denisa/clq-action?include_prereleases&sort=semver)](https://github.com/denisa/clq-action/releases)
 
-GitHub action for the changelog query tool ([clq](https://github.com/denisa/clq))
+GitHub Action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
 
 ## Inputs

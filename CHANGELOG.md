@@ -18,17 +18,25 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.3] - 2024-08-16
+
+### Fixed
+
+- Restore checkov
+- Reduce permissions in the various workflows
+- Correct a few natural language issues
+
 ## [1.4.2] - 2024-06-02
 
 ### Fixed
 
-- Bump super-linter/super-linter from 5 to 6
+- Bump `super-linter/super-linter` from 5 to 6
 
 ## [1.4.1] - 2024-01-20
 
 ### Fixed
 
-- Bump actions/upload-artifact from 3 to 4
+- Bump `actions/upload-artifact` from 3 to 4
 - Define emoji to include in the release notes
 - Capitalize all change items in this changelog
 
@@ -48,21 +56,21 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- Improve sample jobs in the README.md
-- Bump denisa/clq from 1.7.10 to 1.7.11
+- Improve sample jobs in the `README.md`
+- Bump `denisa/clq` from 1.7.10 to 1.7.11
 
 ## [1.3.3] - 2023-09-05
 
 ### Fixed
 
-- Bump actions/checkout from 3 to 4
+- Bump `actions/checkout` from 3 to 4
 
 ## [1.3.2] - 2023-04-08
 
 ### Fixed
 
-- Bump denisa/clq from 1.7.3 to 1.7.10
-- Handle multi-line output to $GITHUB_OUTPUT
+- Bump `denisa/clq` from 1.7.3 to 1.7.10
+- Handle multi-line output to `$GITHUB_OUTPUT`
 
 ## [1.3.1] - 2023-01-14
 
@@ -80,22 +88,22 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- Use denisa/semantic-tag-helper
+- Use `denisa/semantic-tag-helper`
 
 ## [1.2.3] - 2022-12-26
 
 ### Fixed
 
-- Bump denisa/clq from 1.7.1-alpine to 1.7.3-alpine
-- Bump koalaman/shellcheck from v0.8.0 to v0.9.0
-- Bump ncipollo/release-action from 1.10.0 to 1.12.0
-- Bump actions/checkout from 3.0.2 to 3.2.0
+- Bump `denisa/clq` from 1.7.1-alpine to 1.7.3-alpine
+- Bump `koalaman/shellcheck` from v0.8.0 to v0.9.0
+- Bump `ncipollo/release-action` from 1.10.0 to 1.12.0
+- Bump `actions/checkout` from 3.0.2 to 3.2.0
 
 ## [1.2.2] - 2022-08-30
 
 ### Fixed
 
-- Bump denisa/clq from 1.6.3-alpine to 1.7.1-alpine
+- Bump `denisa/clq` from 1.6.3-alpine to 1.7.1-alpine
 - Minor documentation improvements
 
 ## [1.2.1] - 2022-05-25
@@ -109,12 +117,12 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Added
 
 - Use option changeMap to specify a changeMap to use instead of the default.
-- A custom changemap.json for use by the CHANGELOG.md, and rewrite the category changes
+- A custom `changemap.json` for use by the `CHANGELOG.md`, and rewrite the category changes
   to conform.
 
 ### Fixed
 
-- Bump denisa/clq from 1.6.2-alpine to 1.6.3-alpine
+- Bump `denisa/clq` from 1.6.2-alpine to 1.6.3-alpine
 
 ## [1.1.3] - 2022-05-08
 
@@ -127,14 +135,14 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - When creating all tags, creates either version or (tries to create) prerelease tags
-- Bump denisa/clq from 1.6.1-alpine to 1.6.2-alpine
+- Bump `denisa/clq` from 1.6.1-alpine to 1.6.2-alpine
 
 ## [1.1.1] - 2022-04-30
 
 ### Fixed
 
 - Create all tags include prerelease version
-- Examples in the README were not referencing the action
+- Examples in `README.md` were not referencing the action
 
 ## [1.1.0] - 2022-04-29
 
@@ -144,10 +152,10 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- Add .editconfig
-- Bump actions/checkout from 2.3.1 to 3.0.2
-- Bump denisa/clq from 1.3.0-alpine to 1.6.1-alpine
-- Change to ncipollo/release-action
+- Add `.editconfig`
+- Bump `actions/checkout` from 2.3.1 to 3.0.2
+- Bump `denisa/clq` from 1.3.0-alpine to 1.6.1-alpine
+- Change to `ncipollo/release-action`
 
 ## [1.0.2] - 2020-07-25
 
