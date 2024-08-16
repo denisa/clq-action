@@ -18,6 +18,13 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.3] - 2024-08-16
+
+### Fixed
+
+- Restore checkov
+- reduce permissions in the various workflows
+
 ## [1.4.2] - 2024-06-02
 
 ### Fixed
