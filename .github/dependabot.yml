@@ -7,8 +7,3 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-minor"]
-
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "weekly"

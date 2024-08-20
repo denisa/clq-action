@@ -24,7 +24,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 - Bump `super-linter/super-linter` from 6 to 7
 - Disable `prettier`, its opinion differs too much
-
+- Remove reference to the Docker ecosystem from Dependabot
 
 ## [1.4.3] - 2024-08-16
 
