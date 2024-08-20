@@ -23,6 +23,8 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump `super-linter/super-linter` from 6 to 7
+- Disable `prettier`, its opinion differs too much
+
 
 ## [1.4.3] - 2024-08-16
 
