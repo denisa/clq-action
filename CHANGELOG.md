@@ -18,6 +18,12 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.6] - 2025-03-02
+
+### Fixed
+
+- Bump clq from 1.8.1 to 1.8.17.
+
 ## [1.4.5] - 2024-11-03
 
 ### Fixed
