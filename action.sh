@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ "${RUNNER_DEBUG}" == 1 ]; then
+  set -xv
+fi
+
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -14,7 +18,7 @@ clq() {
     volumes+=("-v" "${changeMap}:/home/changemap.json:ro")
   fi
 
-  docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.17" "$@" /home/CHANGELOG.md
+  docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.19" "$@" /home/CHANGELOG.md
 }
 
 mode=$1
