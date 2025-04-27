@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ "${RUNNER_DEBUG}" == 1 ]; then
+  set -xv
+fi
+
 set -o errexit
 set -o nounset
 set -o pipefail

@@ -23,6 +23,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump clq from 1.8.17 to 1.8.19.
+- Turn on trace and verbose mode when the workflow is runing GitHub debug flag
 
 ## [1.4.6] - 2025-03-02
 
