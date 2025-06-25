@@ -2,6 +2,8 @@
 
 ![GitHub Release Date](https://img.shields.io/github/release-date/denisa/clq-action?color=blue)
 [![version](https://img.shields.io/github/v/release/denisa/clq-action?include_prereleases&sort=semver)](https://github.com/denisa/clq-action/releases)
+[![linter](https://github.com/denisa/clq-action/actions/workflows/linter.yaml/badge.svg?branch=main)](https://github.com/denisa/clq-action/actions/workflows/linter.yaml?query=branch%3Amain)
+[![ci](https://github.com/denisa/clq-action/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/denisa/clq-action/actions/workflows/ci.yaml?query=branch%3Amain)
 
 GitHub Action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
