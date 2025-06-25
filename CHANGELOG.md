@@ -18,6 +18,16 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.8] - 2025-06-24
+
+### Fixed
+
+- Rely on Rulesets, not branch name, to decide when to validate the changelog.
+- Skip builds on draft pull request
+- Add ci and lint badges to the readme page
+- Improve example code
+- `.ecrc` is now unsupported, renamed to `.editorconfig-checker.json`
+
 ## [1.4.7] - 2025-04-27
 
 ### Fixed

@@ -2,6 +2,8 @@
 
 ![GitHub Release Date](https://img.shields.io/github/release-date/denisa/clq-action?color=blue)
 [![version](https://img.shields.io/github/v/release/denisa/clq-action?include_prereleases&sort=semver)](https://github.com/denisa/clq-action/releases)
+[![linter](https://github.com/denisa/clq-action/actions/workflows/linter.yaml/badge.svg?branch=main)](https://github.com/denisa/clq-action/actions/workflows/linter.yaml?query=branch%3Amain)
+[![ci](https://github.com/denisa/clq-action/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/denisa/clq-action/actions/workflows/ci.yaml?query=branch%3Amain)
 
 GitHub Action for the changelog query tool ([clq](https://github.com/denisa/clq))
 — easily validate a changelog and extract the information needed to cut a release.
@@ -82,8 +84,24 @@ This build ensures that the changelog introduces a new release version.
 Use as
 
 ```yaml
+  is-target-branch-protected:
+    runs-on: ubuntu-latest
+    outputs:
+      yes: ${{ steps.gh-query.outputs.validate_in_list }}
+    steps:
+      - id: gh-query
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ "${RUNNER_DEBUG}" == 1 ] && set -xv
+          set -u
+
+          if gh ruleset check --repo "${GITHUB_REPOSITORY}" "${GITHUB_BASE_REF:-GITHUB_REF_NAME}" | grep -q context:validate-release; then
+            echo "validate_in_list=true" >>"${GITHUB_OUTPUT}"
+          fi
   validate-release:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    if: ${{ needs.is-target-branch-protected.outputs.yes && ! github.event.pull_request.draft }}
+    needs: is-target-branch-protected
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
