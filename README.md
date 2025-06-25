@@ -84,8 +84,24 @@ This build ensures that the changelog introduces a new release version.
 Use as
 
 ```yaml
+  is-target-branch-protected:
+    runs-on: ubuntu-latest
+    outputs:
+      yes: ${{ steps.gh-query.outputs.validate_in_list }}
+    steps:
+      - id: gh-query
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ "${RUNNER_DEBUG}" == 1 ] && set -xv
+          set -u
+
+          if gh ruleset check --repo "${GITHUB_REPOSITORY}" "${GITHUB_BASE_REF:-GITHUB_REF_NAME}" | grep -q context:validate-release; then
+            echo "validate_in_list=true" >>"${GITHUB_OUTPUT}"
+          fi
   validate-release:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    if: ${{ needs.is-target-branch-protected.outputs.yes && ! github.event.pull_request.draft }}
+    needs: is-target-branch-protected
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

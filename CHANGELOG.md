@@ -25,6 +25,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 - Rely on Rulesets, not branch name, to decide when to validate the changelog.
 - Skip builds on draft pull request
 - Add ci and lint badges to the readme page
+- Improve example code
 
 ## [1.4.7] - 2025-04-27
 
