@@ -24,6 +24,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 - Bump actions/checkout from 4 to 5
 - Bump super-linter/super-linter from 7 to 8
+- Align Makefile target with project name `super-linter`
 
 ## [1.4.8] - 2025-06-24
 
@@ -127,7 +128,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Added
 
-- The new optional argument `dockerProxy` makes it possible to fetch the clq docker image
+- The new optional argument `dockerProxy` makes it possible to fetch the clq Docker image
   through a proxy and bypass rate limiting.
 
 ### Fixed

@@ -19,7 +19,7 @@ ${TARGET_TEST_FILE}:%:
 shellcheck:
 	docker run --rm -v "$(CURDIR):/mnt" koalaman/shellcheck:v0.9.0 action.sh
 
-superlinter:
+super-linter:
 	docker run --rm \
 		--platform linux/amd64 \
 		--rm \
@@ -27,7 +27,7 @@ superlinter:
 		-e SHELL=/bin/bash \
 		--env-file ".github/super-linter.env" \
 		-w /tmp/lint -v "$$PWD":/tmp/lint \
-		ghcr.io/super-linter/super-linter:v7
+		ghcr.io/super-linter/super-linter:v8
 
 .PHONY: versions
 versions:
