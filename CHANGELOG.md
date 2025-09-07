@@ -25,6 +25,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 - Bump actions/checkout from 4 to 5
 - Bump super-linter/super-linter from 7 to 8
 - Align Makefile target with project name `super-linter`
+- Bump `denisa/clq` from 1.8.19 to 1.8.22
 
 ## [1.4.8] - 2025-06-24
 
