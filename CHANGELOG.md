@@ -18,6 +18,16 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.9] - 2025-09-06
+
+### Fixed
+
+- Bump actions/checkout from 4 to 5
+- Bump super-linter/super-linter from 7 to 8
+- Align Makefile target with project name `super-linter`
+- Bump `denisa/clq` from 1.8.19 to 1.8.22
+- Badge for the linting step removed as the workflow was merged with ci
+
 ## [1.4.8] - 2025-06-24
 
 ### Fixed
@@ -120,7 +130,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Added
 
-- The new optional argument `dockerProxy` makes it possible to fetch the clq docker image
+- The new optional argument `dockerProxy` makes it possible to fetch the clq Docker image
   through a proxy and bypass rate limiting.
 
 ### Fixed
