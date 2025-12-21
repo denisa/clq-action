@@ -18,12 +18,25 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.4.10] - 2025-12-20
+
+### Fixed
+
+- Bump `actions/checkout` from 5 to 6
+- Bump `actions/upload-artifact` from 4 to 6
+- Bump `koalaman/shellcheck` from 0.9.0 to 0.11.0
+- `Makefile` reads the super-linter version from the workflow
+- New `Makefile` target `lint` runs all linters
+- Disable Black, Ruff, Biome
+- Configuration file renamed to default name `.markdown-lint.yml`
+- Bump `denisa/clq` to 1.8.24 in the action and during the build
+
 ## [1.4.9] - 2025-09-06
 
 ### Fixed
 
-- Bump actions/checkout from 4 to 5
-- Bump super-linter/super-linter from 7 to 8
+- Bump `actions/checkout` from 4 to 5
+- Bump `super-linter/super-linter` from 7 to 8
 - Align Makefile target with project name `super-linter`
 - Bump `denisa/clq` from 1.8.19 to 1.8.22
 - Badge for the linting step removed as the workflow was merged with ci
@@ -42,7 +55,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 ### Fixed
 
-- Bump clq from 1.8.17 to 1.8.19.
+- Bump `clq` from 1.8.17 to 1.8.19.
 - Turn on trace and verbose mode when the workflow is runing GitHub debug flag
 
 ## [1.4.6] - 2025-03-02
