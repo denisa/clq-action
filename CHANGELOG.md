@@ -23,6 +23,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump actions/checkout from 5 to 6
+- Bump actions/upload-artifact from 4 to 6
 
 ## [1.4.9] - 2025-09-06
 
