@@ -24,6 +24,11 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 
 - Bump actions/checkout from 5 to 6
 - Bump actions/upload-artifact from 4 to 6
+- Bump `koalaman/shellcheck` from 0.9.0 to 0.11.0
+- `Makefile` reads the super-linter version from the workflow
+- New `Makefile` target `lint` runs all linters
+- Disable Black, Ruff, Biome
+- Configuration file renamed to default name `.markdown-lint.yml`
 
 ## [1.4.9] - 2025-09-06
 
