@@ -10,7 +10,7 @@ test: ${TARGET_TEST_FILE} $(if $(findstring $(CI),true),,shellcheck)
 ${TARGET_TEST_FILE}:%:
 	mkdir -p build
 	rm -f build/$*
-	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./action.sh feature \
+	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./validateChangelog.sh feature \
 		test/changelog/$*.md $(wildcard test/changemap/$*.json)
 	diff -U3 \
 		<( grep -vE '(changes<<)?[a-zA-Z0-9+/=]{20}' test/expected/$* ) \
