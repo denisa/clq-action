@@ -30,6 +30,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump `denisa/clq` from 1.8.24 to 1.8.28
+- Bump `actions/upload-artifact` from 6 to 7
 
 ## [1.4.10] - 2025-12-20
 
