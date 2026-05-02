@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-if [ "${RUNNER_DEBUG}" == 1 ]; then
-  set -xv
-fi
+[ "${RUNNER_DEBUG}" == 1 ] && set -xv
 
-set -o errexit
-set -o nounset
-set -o pipefail
+set -eu
 
 clq() {
   volumes=("-v" "${changeLog}:/home/CHANGELOG.md:ro")
@@ -21,7 +17,7 @@ clq() {
   docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.24" "$@" /home/CHANGELOG.md
 }
 
-mode=$1
+mode="${1}"
 shift
 case "${mode}" in
   release)
@@ -31,28 +27,29 @@ case "${mode}" in
     mode=''
     ;;
   *)
-    echo "::error ::Mode ${mode} undefined, must be one of (feature|release)"
+    echo "::error::Mode ${mode} undefined, must be one of (feature|release)"
     exit 1
     ;;
 esac
 
-changeLog=$(realpath "$1")
+changeLog=$(realpath "${1}")
 shift
-if ! [ -r "${changeLog}" ]; then
-  echo "::error ::changeLog ${changeLog} is not readable"
+if ! [ -f "${changeLog}" ] || ! [ -r "${changeLog}" ]; then
+  echo "::error::changeLog ${changeLog} is not readable"
   exit 1
 fi
 
 if [ "$#" -eq 1 ]; then
-  changeMap=$(realpath "$1")
+  changeMap=$(realpath "${1}")
   shift
-  if ! [ -r "${changeMap}" ]; then
-    echo "::error ::changeMap ${changeMap} is not readable"
+  if ! [ -f "${changeMap}" ] || ! [ -r "${changeMap}" ]; then
+    echo "::error::changeMap ${changeMap} is not readable"
     exit 1
   fi
 else
   changeMap=''
 fi
+
 release_version="$(clq -query 'releases[0].version')"
 release_tag="v${release_version}"
 

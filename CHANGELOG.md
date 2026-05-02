@@ -18,6 +18,15 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.5.0] - 2026-05-03
+
+### Added
+
+- Option to validate in a pull-request that a changelog introduces a single new version.
+- Fix GitHub workflow command syntax.
+- Add missing permissions `statuses: write` to the lint job.
+- Add initial validation of the file format, before extracting any information from it.
+
 ## [1.4.10] - 2025-12-20
 
 ### Fixed
@@ -56,7 +65,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - Bump `clq` from 1.8.17 to 1.8.19.
-- Turn on trace and verbose mode when the workflow is runing GitHub debug flag
+- Turn on trace and verbose mode when the workflow is running GitHub debug flag
 
 ## [1.4.6] - 2025-03-02
 

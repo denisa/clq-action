@@ -9,6 +9,11 @@ GitHub Action for the changelog query tool ([clq](https://github.com/denisa/clq)
 
 ## Inputs
 
+### `basePath`
+
+Relative path of a directory to fetch the CHANGELOG from the base branch. Defaults to `base`.
+Used only when `validateAgainstBase` is true
+
 ### `changelog`
 
 The name of the changelog file. Default to `CHANGELOG.md`
@@ -36,6 +41,13 @@ An alternative to that option would be to [configure the Docker daemon](https://
 The validation mode, one of `feature` or `release`. Default to `release`.
 The `feature` mode validates the syntax and the release ordering; the `release` mode
 further enforces that the top-most entry has a release version.
+
+### `validateAgainstBase`
+
+Whether to validate the changelog against the base branch. Default to `true`.
+When set to `true`, the action will fetch the changelog from the base branch, persist it locally under the name of
+`basePath` and compare it with the one in the current branch, ensuring that a single new release version is
+introduced.
 
 ## Outputs
 

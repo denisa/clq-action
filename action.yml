@@ -1,43 +1,64 @@
 name: 'Changelog Query'
 description: 'Validate the changelog file and extract current release information'
 inputs:
-        changelog:
-                description: 'name of the changelog file'
-                required: false
-                default: 'CHANGELOG.md'
-        changeMap:
-                description: 'A configuration file that defines a custom mapping from change kind to version increment.'
-                required: false
-                default: ''
-        dockerProxy:
-                description: 'A proxy for dockerhub'
-                required: false
-                default: ''
-        mode:
-                description: 'validation mode for the changelog, one of "release" or "feature"'
-                required: false
-                default: 'release'
+  basePath:
+    description: 'local path to check out the base branch'
+    required: false
+    default: 'base'
+  changelog:
+    description: 'name of the changelog file'
+    required: false
+    default: 'CHANGELOG.md'
+  changeMap:
+    description: 'A configuration file that defines a custom mapping from change kind to version increment.'
+    required: false
+    default: ''
+  dockerProxy:
+    description: 'A proxy for dockerhub'
+    required: false
+    default: ''
+  mode:
+    description: 'validation mode for the changelog, one of "release" or "feature"'
+    required: false
+    default: 'release'
+  validateAgainstBase:
+    description: 'If true and in a pull-request, ensures that the changelog introduce exactly one new version'
+    required: false
+    default: 'true'
 outputs:
-        version:
-                description: 'The release version'
-                value: ${{ steps.clq.outputs.version }}
-        tag:
-                description: 'The tag to apply, the version prefixed with a "v"'
-                value: ${{ steps.clq.outputs.tag }}
-        name:
-                description: 'The release name'
-                value: ${{ steps.clq.outputs.name }}
-        status:
-                description: 'The status of the release (prereleased, released, unreleased, yanked)'
-                value: ${{ steps.clq.outputs.status }}
-        changes:
-                description: 'all the changes for that release'
-                value: ${{ steps.clq.outputs.changes }}
+  version:
+    description: 'The release version'
+    value: ${{ steps.clq.outputs.version }}
+  tag:
+    description: 'The tag to apply, the version prefixed with a "v"'
+    value: ${{ steps.clq.outputs.tag }}
+  name:
+    description: 'The release name'
+    value: ${{ steps.clq.outputs.name }}
+  status:
+    description: 'The status of the release (prereleased, released, unreleased, yanked)'
+    value: ${{ steps.clq.outputs.status }}
+  changes:
+    description: 'all the changes for that release'
+    value: ${{ steps.clq.outputs.changes }}
 runs:
-        using: 'composite'
-        steps:
-            - id: clq
-              run: ${{ github.action_path }}/action.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
-              shell: bash
-              env:
-                DOCKER_PROXY: ${{ inputs.dockerProxy }}
+  using: 'composite'
+  steps:
+    - id: clq
+      run: ${{ github.action_path }}/validateChangelog.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+      shell: bash
+      env:
+        DOCKER_PROXY: ${{ inputs.dockerProxy }}
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
+      uses: actions/checkout@v6
+      with:
+        ref: ${{ github.base_ref }}
+        sparse-checkout: |
+          ${{ inputs.changelog }}
+        sparse-checkout-cone-mode: false
+        path: ${{ inputs.basePath }}
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
+      run: ${{ github.action_path }}/validateAgainstBase.sh ${{ inputs.basePath }}/${{ inputs.changelog }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+      shell: bash
+      env:
+        DOCKER_PROXY: ${{ inputs.dockerProxy }}
