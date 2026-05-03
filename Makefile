@@ -33,7 +33,7 @@ clq:
 		--pull always \
 		--volume $(CURDIR)/CHANGELOG.md:/home/CHANGELOG.md:ro \
 		--volume $(CURDIR)/.github/clq/changemap.json:/home/changemap.json:ro \
-		denisa/clq:1.8.24 -changeMap /home/changemap.json /home/CHANGELOG.md
+		denisa/clq:1.8.28 -changeMap /home/changemap.json /home/CHANGELOG.md
 
 .PHONY: shellcheck
 shellcheck:
