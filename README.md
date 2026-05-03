@@ -11,7 +11,7 @@ GitHub Action for the changelog query tool ([clq](https://github.com/denisa/clq)
 
 ### `basePath`
 
-A name to use to fetch the CHANGELOG from the base branch. Default to `base`.
+Relative path of a directory to fetch the CHANGELOG from the base branch. Defaults to `base`.
 Used only when `validateAgainstBase` is true
 
 ### `changelog`

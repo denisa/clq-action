@@ -17,7 +17,7 @@ clq() {
   docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.28" "$@" /home/CHANGELOG.md
 }
 
-mode=$1
+mode="${1}"
 shift
 case "${mode}" in
   release)
@@ -32,17 +32,17 @@ case "${mode}" in
     ;;
 esac
 
-changeLog=$(realpath "$1")
+changeLog=$(realpath "${1}")
 shift
-if ! [ -r "${changeLog}" ]; then
+if ! [ -f "${changeLog}" ] || ! [ -r "${changeLog}" ]; then
   echo "::error::changeLog ${changeLog} is not readable"
   exit 1
 fi
 
 if [ "$#" -eq 1 ]; then
-  changeMap=$(realpath "$1")
+  changeMap=$(realpath "${1}")
   shift
-  if ! [ -r "${changeMap}" ]; then
+  if ! [ -f "${changeMap}" ] || ! [ -r "${changeMap}" ]; then
     echo "::error::changeMap ${changeMap} is not readable"
     exit 1
   fi

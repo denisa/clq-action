@@ -5,7 +5,7 @@
 set -eu
 
 clq() {
-  volumes=("-v" "$1:/home/CHANGELOG.md:ro")
+  volumes=("-v" "$(realpath "${1}"):/home/CHANGELOG.md:ro")
   shift
   if [ -n "${changeMap}" ]; then
     set -- "-changeMap" "/home/changemap.json" "$@"
@@ -15,22 +15,22 @@ clq() {
   docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.28" "$@" /home/CHANGELOG.md
 }
 
-baseChangeLog=$(realpath "$1")
+baseChangeLog="${1}"
 shift
-if ! [ -r "${baseChangeLog}" ]; then
+if ! [ -f "${baseChangeLog}" ] || ! [ -r "${baseChangeLog}" ]; then
   echo "::warning::Base changeLog ${baseChangeLog} is not readable – skipping validation"
   exit 0
 fi
 
-changeLog=$(realpath "$1")
+changeLog="${1}"
 shift
-if ! [ -r "${changeLog}" ]; then
+if ! [ -f "${changeLog}" ] || ! [ -r "${changeLog}" ]; then
   echo "::error::changeLog ${changeLog} is not readable"
   exit 1
 fi
 
 if [ "$#" -eq 1 ]; then
-  changeMap=$(realpath "$1")
+  changeMap=$(realpath "${1}")
   shift
   if ! [ -r "${changeMap}" ]; then
     echo "::error::changeMap ${changeMap} is not readable"

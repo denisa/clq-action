@@ -22,7 +22,7 @@ inputs:
     required: false
     default: 'release'
   validateAgainstBase:
-    description: 'If true and in a pull-request, ensure that the changelog introduce exactly one new version'
+    description: 'If true and in a pull-request, ensures that the changelog introduce exactly one new version'
     required: false
     default: 'true'
 outputs:
