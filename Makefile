@@ -10,7 +10,7 @@ test: ${TARGET_TEST_FILE} $(if $(findstring $(CI),true),,shellcheck)
 ${TARGET_TEST_FILE}:%:
 	mkdir -p build
 	rm -f build/$*
-	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./action.sh feature \
+	DOCKER_PROXY='' GITHUB_OUTPUT='build/$*' ./validateChangelog.sh feature \
 		test/changelog/$*.md $(wildcard test/changemap/$*.json)
 	diff -U3 \
 		<( grep -vE '(changes<<)?[a-zA-Z0-9+/=]{20}' test/expected/$* ) \
@@ -33,7 +33,7 @@ clq:
 		--pull always \
 		--volume $(CURDIR)/CHANGELOG.md:/home/CHANGELOG.md:ro \
 		--volume $(CURDIR)/.github/clq/changemap.json:/home/changemap.json:ro \
-		denisa/clq:1.8.24 -changeMap /home/changemap.json /home/CHANGELOG.md
+		denisa/clq:1.8.28 -changeMap /home/changemap.json /home/CHANGELOG.md
 
 .PHONY: shellcheck
 shellcheck:
