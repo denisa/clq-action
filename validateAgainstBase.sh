@@ -32,7 +32,7 @@ fi
 if [ "$#" -eq 1 ]; then
   changeMap=$(realpath "${1}")
   shift
-  if ! [ -r "${changeMap}" ]; then
+  if ! [ -f "${changeMap}" ] || ! [ -r "${changeMap}" ]; then
     echo "::error::changeMap ${changeMap} is not readable"
     exit 1
   fi
