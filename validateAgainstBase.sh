@@ -12,7 +12,7 @@ clq() {
     volumes+=("-v" "${changeMap}:/home/changemap.json:ro")
   fi
 
-  docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.24" "$@" /home/CHANGELOG.md
+  docker run "${volumes[@]}" --rm "${DOCKER_PROXY}denisa/clq:1.8.28" "$@" /home/CHANGELOG.md
 }
 
 baseChangeLog=$(realpath "$1")

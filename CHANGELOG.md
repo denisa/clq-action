@@ -27,6 +27,10 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 - Add missing permissions `statuses: write` to the lint job.
 - Add initial validation of the file format, before extracting any information from it.
 
+### Fixed
+
+- Bump `denisa/clq` from 1.8.24 to 1.8.28
+
 ## [1.4.10] - 2025-12-20
 
 ### Fixed
