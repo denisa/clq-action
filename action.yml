@@ -50,7 +50,7 @@ runs:
       env:
         DOCKER_PROXY: ${{ inputs.dockerProxy }}
     - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         ref: ${{ github.base_ref }}
         sparse-checkout: |
