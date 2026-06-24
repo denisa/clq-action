@@ -49,15 +49,15 @@ runs:
       shell: bash
       env:
         DOCKER_PROXY: ${{ inputs.dockerProxy }}
-    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
-      uses: actions/checkout@v6
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.event_name == 'pull_request'
+      uses: actions/checkout@v7
       with:
         ref: ${{ github.base_ref }}
         sparse-checkout: |
           ${{ inputs.changelog }}
         sparse-checkout-cone-mode: false
         path: ${{ inputs.basePath }}
-    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.event_name == 'pull_request'
       run: ${{ github.action_path }}/validateAgainstBase.sh ${{ inputs.basePath }}/${{ inputs.changelog }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
       shell: bash
       env:
