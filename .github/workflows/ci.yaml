@@ -15,7 +15,7 @@ jobs:
       contents: read
       statuses: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - run: cat .github/super-linter.env >> "$GITHUB_ENV"
@@ -28,7 +28,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: make versions
       - run: make test
       - uses: actions/upload-artifact@v7
@@ -75,7 +75,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Extract tag from the changelog
         uses: ./
         id: clq-extract
@@ -94,7 +94,7 @@ jobs:
       contents: write
       deployments: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./
         id: clq-extract
         with:
