@@ -23,6 +23,7 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
 ### Fixed
 
 - `cql-action` relies directly on the `github.event_name` to decide if it has to validate against previous version.
+- Bump `actions/checkout` from 6 to 7
 
 ## [1.5.0] - 2026-05-03
 
