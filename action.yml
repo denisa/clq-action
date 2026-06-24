@@ -45,11 +45,11 @@ runs:
   using: 'composite'
   steps:
     - id: clq
-      run: ${{ github.action_path }}/validateChangelog.sh ${{ inputs.mode }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+      run: '${{ github.action_path }}/validateChangelog.sh' '${{ inputs.mode }}' '${{ inputs.changelog }}' '${{ inputs.changeMap }}'
       shell: bash
       env:
         DOCKER_PROXY: ${{ inputs.dockerProxy }}
-    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && '${{ github.event_name }}' == 'pull_request'
       uses: actions/checkout@v6
       with:
         ref: ${{ github.base_ref }}
@@ -57,8 +57,8 @@ runs:
           ${{ inputs.changelog }}
         sparse-checkout-cone-mode: false
         path: ${{ inputs.basePath }}
-    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && github.base_ref != ''
-      run: ${{ github.action_path }}/validateAgainstBase.sh ${{ inputs.basePath }}/${{ inputs.changelog }} ${{ inputs.changelog }} ${{ inputs.changeMap }}
+    - if: inputs.mode == 'release' && inputs.validateAgainstBase == 'true' && '${{ github.event_name }}' == 'pull_request'
+      run: '${{ github.action_path }}/validateAgainstBase.sh' '${{ inputs.basePath }}/${{ inputs.changelog }}' '${{ inputs.changelog }}' '${{ inputs.changeMap }}'
       shell: bash
       env:
         DOCKER_PROXY: ${{ inputs.dockerProxy }}

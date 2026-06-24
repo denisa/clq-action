@@ -18,6 +18,12 @@ Categories, defined in [changemap.json](.github/clq/changemap.json):
   - `Fixed` for any bugfixes.
   - `Security` in case of vulnerabilities.
 
+## [1.5.1] - 2026-06-23
+
+### Fixed
+
+- `cql-action` relies directly on the `github.event_name` to decide if it has to validate against previous version.
+
 ## [1.5.0] - 2026-05-03
 
 ### Added
